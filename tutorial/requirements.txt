@@ -1,0 +1,4 @@
+requests_oauthlib>=0.4.2
+Requests>=2.5.1
+Flask>=0.10.1
+

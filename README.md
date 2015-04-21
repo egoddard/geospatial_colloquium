@@ -61,6 +61,18 @@ On Windows, please use cmd.exe, not Powershell. Script execution is disabled
 by default in Powershell, which causes activation of the virtual environment 
 to fail.
 ```batchfile
-# If using cmd.exe:
 venv\Scripts\activate.bat
 ```
+
+###Install the required Python libraries
+Once the virtual environment is activated, python can be run from the command 
+line by invoking `python` and will work on all platforms. To install the 
+python libraries we'll be using, run `pip install -r requirements.txt`.
+
+###Deactivating the virtual environment
+The Python virtual environment is only applied to the terminal in which it was 
+activated. Closing the terminal will kill the virtual environment. If you want 
+to use it again, run the activation command above for your platform.
+
+To close the virtual environment without closing the terminal, use the 
+`deactivate` command.

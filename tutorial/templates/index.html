@@ -85,7 +85,13 @@
                             var coords = [business.location.coordinate.latitude,
                                           business.location.coordinate.longitude];
 
+                            // add the name of the pub to the popup content
+                            var popupContent = "<p><strong>" + business.name +
+                                "</strong></p>" +
+                                "<img src=\"" + yelpLogoUrl + "\">";
+
                             beerArray[i] = L.marker(coords, {icon: beerIcon})
+                                .bindPopup(popupContent);
                         } 
 
                         placesGroup = L.layerGroup(beerArray).addTo(map);

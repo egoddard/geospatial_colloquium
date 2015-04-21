@@ -57,10 +57,10 @@ c:\Python34\python c:\Python34\Tools\Scripts\pyvenv.py venv
 source venv/bin/activate
 ```
 ####Windows
-```bash
+On Windows, please use cmd.exe, not Powershell. Script execution is disabled 
+by default in Powershell, which causes activation of the virtual environment 
+to fail.
+```batchfile
 # If using cmd.exe:
-venv/bin/activate.bat
-
-# If using Powershell:
-venv/bin/Activate.ps1
+venv\Scripts\activate.bat
 ```

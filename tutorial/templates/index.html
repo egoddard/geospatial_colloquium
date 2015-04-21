@@ -25,6 +25,11 @@
             }).addTo(map);
             var placesGroup = L.layerGroup().addTo(map);
 
+            // Create a style for marking the pubs' locations on the map
+            var beerIcon = L.icon({
+                    iconUrl: "{{ url_for('static', filename='img/beer.png') }}",
+                    iconSize: [25, 30]
+            });
  
             // Attach the map click event handler to our getPlaces function
             map.on('click', function(e) {
@@ -33,13 +38,14 @@
 
             // Create a function that passes a REST request to our flask within() route
             function getPlaces(latlng) {
+                var yelpLogoUrl = "http://s3-media1.fl.yelpcdn.com/assets/2/www/img/14f29ad24935/map/miniMapLogo.png";
                 url = "/within?lat=" + latlng.lat + "&lng=" + latlng.lng;
 
                 map.removeLayer(searchCircle);
                 searchCircle = L.circle([latlng.lat, latlng.lng], 500, {
                         color: '#D4D419',
                         fillColor: '#D4D419',
-                        fillOpacity: 0.4
+                        fillOpacity: 0.05
                         }).addTo(map);
 
                 // send the REST request to the within() function
@@ -52,7 +58,37 @@
                 request.onreadystatechange = function() {
                     if (request.readyState == 4 && request.status == 200)
                     {
-                        console.log(JSON.parse(request.responseText));
+                        var businesses = JSON.parse(request.responseText).businesses;
+                        console.log(businesses);
+
+                        // Remove the beerPlacesGroup layer so we can recreate it 
+                        // with the new results
+                        map.removeLayer(placesGroup);  
+
+                        // Change the color of our search circle depending on 
+                        // if any bars were returned
+                        if (businesses.length > 0) {
+                            circleColor = "#D4D419";
+                        } else {
+                            circleColor = "red";
+                        }
+                        searchCircle.setStyle({color: circleColor,
+                                               fillColor: circleColor
+                        });
+
+                        // Create a new array to hold the returned pubs
+                        var beerArray = new Array(businesses.length);
+
+                        // Loop over the businesses and add each one to the map
+                        for (var i = 0; i < businesses.length; ++i) {
+                            var business = businesses[i];
+                            var coords = [business.location.coordinate.latitude,
+                                          business.location.coordinate.longitude];
+
+                            beerArray[i] = L.marker(coords, {icon: beerIcon})
+                        } 
+
+                        placesGroup = L.layerGroup(beerArray).addTo(map);
                     }
                 }
 

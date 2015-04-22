@@ -129,6 +129,9 @@ background-image: url(./images/south_america_projections.gif)
 ---
 background-image: url(./images/threepro.gif)
 ---
+class: center, middle, inverse
+##[Interactive Projections Demo](http://cartography.oregonstate.edu/ScaleAdaptiveWebMapProjections.html#CanvasMapExample)
+---
 # Apps
 ## Desktop/Server
 1. Esri ArcGIS - [http://www.esri.com](http://www.esri.com)

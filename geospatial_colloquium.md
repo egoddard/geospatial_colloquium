@@ -158,5 +158,8 @@ class: center, middle, inverse
 class: center, middle, inverse
 # and now...
 ---
-background-image: url(./images/beer_prediction.jpg)
+class: center, middle
+![beer](./images/beer_prediction.jpg)
+###[https://github.com/egoddard/geospatial_colloquium](https://github.com/egoddard/geospatial_colloquium)
+
 
